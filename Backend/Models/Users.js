@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 const ObjectId = Schema.ObjectId;
 
 const User = new Schema({
-  emailId: String,
+  email: String,
   name: String,
   password: String,
   following: [{ type: ObjectId, ref: "NGO" }],

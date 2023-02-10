@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const NGO = require("../Models/NGO");
+const User = require("../Models/Users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 /* GET home page. */
@@ -18,6 +19,23 @@ router.post("/NGO", async (req, res) => {
     return res.json({
       message: "NGO created",
       jwt: jwt.sign(ngo.id, process.env.secret, { algorithm: "HS256" }),
+    });
+  } catch (error) {
+    return res.json(500, { message: "Internal Server Error" });
+  }
+});
+
+router.post("/user", async (req, res) => {
+  try {
+    const user = new User({
+      name: req.body.name,
+      email: req.body.email,
+    });
+    user.password = await bcrypt.hash(req.body.password, 10);
+    await user.save();
+    return res.json({
+      message: "User created",
+      jwt: jwt.sign(user.id, process.env.secret, { algorithm: "HS256" }),
     });
   } catch (error) {
     return res.json(500, { message: "Internal Server Error" });
