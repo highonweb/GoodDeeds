@@ -1,5 +1,6 @@
 import React from 'react'
 import './ngo.register.css'
+import axios from 'axios'
 function NgoRegister() {
     const [name, setName] = React.useState("")
     const [email, setEmail] = React.useState("")
@@ -25,7 +26,7 @@ function NgoRegister() {
             return false
         }
     }
-    const handleSignin = (e)=>{
+    const handleSignup = async (e)=>{
         e.preventDefault();
         
         if(!isValidEmail(email)){
@@ -38,17 +39,32 @@ function NgoRegister() {
             alert('password did not match')
         }
         else{
-            console.log(email, password)
+            try {
+                const response = await axios.post("http://192.168.28.251:3000/signup/NGO", {
+                name,  
+                email,
+                description,
+                password,
+                });
+          
+                console.log(response.data);
+                localStorage.setItem('jwt', "Bearer " + response.data.jwt)
+
+              } catch (error) {
+                console.error(error);
+              }
         }
        
         
     }  
   return (
     <div id='register'>
-      <form id='form' onSubmit={(e)=>{handleSignin(e)}}>
+      <form id='form' onSubmit={(e)=>{handleSignup(e)}}>
              <h1>register</h1>
             <input type="text" name="" id="" placeholder='Name of your organisation' onChange={(e)=>{setName(e.target.value)}} required/>
             <input type="text" name="" id="" placeholder='Email' onChange={(e)=>{setEmail(e.target.value)}} required/> 
+            <input type="text" name="" id="" placeholder='Email' onChange={(e)=>{setWebsite(e.target.value)}} required/> 
+
             <textarea name="" id="" placeholder='Description' onChange={(e)=>{setDescription(e.target.value)}} required/> 
             <input type="password" name="" id="" placeholder='password' onChange={(e)=>{setPassword(e.target.value)}} required/>
             <input type="password" name="" id="" placeholder='confirm password' onChange={(e)=>{setConfirmPassword(e.target.value)}} required/>
@@ -58,4 +74,4 @@ function NgoRegister() {
   )
 }
 
-export default Register
+export default NgoRegister

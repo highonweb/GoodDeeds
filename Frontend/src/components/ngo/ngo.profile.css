@@ -1,0 +1,19 @@
+
+#ngoprofile{
+    width: 100vw;
+    height: 100vh;
+   
+}
+#logo-container{
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+   
+}
+#logo-container > img{
+    margin-right: 10px;
+}
+#inner-container{
+    padding: 10px;
+}
