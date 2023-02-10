@@ -1,20 +1,32 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+const logger = require("morgan");
+const { expressjwt: jwt } = require("express-jwt");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+const NGORouter = require("./routes/NGO");
 
-var app = express();
+require("dotenv").config();
 
-app.use(logger('dev'));
+const app = express();
+
+mongoose.set("strictQuery", false);
+
+mongoose.connect(process.env.MONGO_URI).then(() => {
+  console.log("Connected to MongoDB");
+});
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use("/", indexRouter);
+app.use("/users", jwt({ secret: process.env.secret, algorithms: ["HS256"] }));
+app.use("/users", usersRouter);
+app.use("/NGO", NGORouter);
 
 module.exports = app;
