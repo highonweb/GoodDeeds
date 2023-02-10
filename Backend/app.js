@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const { expressjwt: jwt } = require("express-jwt");
+const cors = require("cors");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -12,7 +13,7 @@ const NGORouter = require("./routes/NGO");
 require("dotenv").config();
 
 const app = express();
-
+app.use(cors);
 mongoose.set("strictQuery", false);
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
