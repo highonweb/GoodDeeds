@@ -6,7 +6,7 @@ const User = new Schema({
   name: String,
   password: String,
   following: [{ type: ObjectId, ref: "NGO" }],
-  totalAmt: Number,
+  totalAmt: { type: Number, default: 0 },
 });
 
 module.exports = model("User", User);

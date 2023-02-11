@@ -7,4 +7,4 @@ const Donation = new Schema({
   date: Date,
 });
 
-module.exports = model("Category", Category);
+module.exports = model("Donation", Donation);

@@ -17,7 +17,7 @@ const NGO = new Schema({
   description: String,
   amountSpent: Number,
   password: String,
-  totalFundRaised: Number,
+  totalFundRaised: { type: Number, Default: 0 },
   campaigns: [{ type: ObjectId, ref: "Campaign" }],
   donors: [{ type: ObjectId, ref: "User" }],
   followers: [{ type: ObjectId, ref: "User" }],

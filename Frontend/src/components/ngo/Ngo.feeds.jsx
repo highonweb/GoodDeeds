@@ -16,7 +16,7 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
-function Ngofeeds({ key, name, description, image, title, goal, raised }) {
+function Ngofeeds({ id, name, description, image, title, goal, raised }) {
   const [donation, setDonation] = React.useState(100);
 
   return (
@@ -98,7 +98,7 @@ function Ngofeeds({ key, name, description, image, title, goal, raised }) {
           <Button
             onClick={async () => {
               let res = await axios.post(
-                "http://localhost:3000/donate",
+                "http://localhost:3000/users/donate",
                 {
                   campaign: id,
                   amount: donation,
@@ -110,6 +110,7 @@ function Ngofeeds({ key, name, description, image, title, goal, raised }) {
                 }
               );
               console.log(res.data);
+              location.href = res.data.link;
             }}
             colorScheme={"twitter"}
             variant="ghost"

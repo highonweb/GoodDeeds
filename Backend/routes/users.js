@@ -5,7 +5,9 @@ const Fuse = require("fuse.js");
 const NGO = require("../Models/NGO");
 const User = require("../Models/Users");
 const Campaigns = require("../Models/Campaigns");
-const axios = require('axios')
+const Donation = require("../Models/Donation");
+const axios = require("axios");
+const ins = require("../Razorpay");
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
@@ -25,44 +27,45 @@ router.get("/campaigns", async (req, res) => {
 // when user clicks on donate button on the campaign page
 
 router.post("/donate", async (req, res) => {
-  
   const user = await User.findById(req.auth);
   const campaign = await Campaigns.findById(req.body.campaign);
-  const ngo = await NGO.findById(campaign.NGO);
+  const ngo = await NGO.findById(campaign.ngo);
   const donation = new Donation({
     user: req.auth,
     campaign: req.body.campaign,
     amount: req.body.amount,
     date: Date.now(),
   });
-  
+
   await donation.save();
-  user.totalAmt += req.body.amount;
+  user.totalAmt += Number(req.body.amount);
+  console.log(user);
   ngo.totalFundRaised += req.body.amount;
   campaign.raised += req.body.amount;
   await user.save();
   await ngo.save();
   await campaign.save();
-  let response =  await axios.post('https://api.razorpay.com/v1/payment_links',{
-    "amount": req.body.amount,
-    "currency": "INR",
-    "expire_by": 1691097057,
-    "reference_id": donation.id,
-    "description": `Payment for Rs.${req.body.amount}`,
-    "customer": {
-      "name": user.name,
-      "email": user.email
+
+  let resp = await ins.paymentLink.create({
+    amount: req.body.amont * 100,
+    currency: "INR",
+    expire_by: 1691097057,
+    reference_id: donation.id,
+    description: `Payment for Rs.${req.body.amount}`,
+    customer: {
+      name: user.name,
+      email: user.email,
     },
-    "notify": {
-      
-      "email": true
+    notify: {
+      email: true,
     },
-    "reminder_enable": true,
-    "callback_url": "http://localhost:5713/home",
-    "callback_method": "get"
-  })
-  return res.json({link : response})
-  // return res.json({ message: "Donation successful" });
+    reminder_enable: true,
+    callback_url: "http://localhost:5173/home",
+    callback_method: "get",
+  });
+
+  console.log(resp.data);
+  return res.json({ link: resp.short_url });
 });
 
 // GET /users/profile

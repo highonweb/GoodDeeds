@@ -10,7 +10,6 @@ const cors = require("cors");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const NGORouter = require("./routes/NGO");
-const { readdirSync } = require("fs");
 
 require("dotenv").config();
 
