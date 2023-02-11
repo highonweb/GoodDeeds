@@ -5,9 +5,9 @@ const Campaign = new Schema({
   NGO: { type: ObjectId, ref: "NGO" },
   title: String,
   image: Buffer,
-  Description: String,
+  description: String,
   raised: Number,
-  Goal: Number,
+  goal: Number,
 });
 
 module.exports = model("Campaign", Campaign);

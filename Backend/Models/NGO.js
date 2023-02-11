@@ -4,8 +4,15 @@ const ObjectId = Schema.ObjectId;
 const NGO = new Schema({
   name: String,
   email: String,
+  location: {
+    lat: String,
+    long: String,
+  },
+  tags: [String],
+  type: String,
+  logo: String,
   description: String,
-  AmountSpent: Number,
+  amountSpent: Number,
   password: String,
   totalFundRaised: Number,
   campaigns: [{ type: ObjectId, ref: "Campaign" }],
