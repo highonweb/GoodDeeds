@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", jwt({ secret: process.env.secret, algorithms: ["HS256"] }));
+// app.use("/users", jwt({ secret: process.env.secret, algorithms: ["HS256"] }));
 app.use("/users", usersRouter);
 app.use("/NGO", jwt({ secret: process.env.secret, algorithms: ["HS256"] }));
 app.use("/NGO", NGORouter);

@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const Message = require("../Models/Messages");
-
+const Fuse = require("fuse.js");
+const NGO = require("../Models/NGO");
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
@@ -26,11 +27,16 @@ router.get("/NGOs", async (req, res, next) => {
   return res.json(ngo);
 });
 
-router.get("/NGOs/search", async (req, res, next) => {
-  const ngo = await NGO.find({
-    name: { $regex: req.query.name, $options: "i" },
-  }).select("name description logo website email");
-  return res.json(ngo);
+router.get("/NGOsearch", async (req, res, next) => {
+  const ngos = await NGO.find().select("name description logo website email");
+  const options = {
+    includeScore: true,
+    // Search in `author` and in `tags` array
+    keys: ["name", "email", "description", "website"],
+  };
+  const fuse = new Fuse(ngos, options);
+  const result = fuse.search(req.query.q);
+  return res.json(result);
 });
 
 router.post("/SendMessageToUser", async (req, res, next) => {
