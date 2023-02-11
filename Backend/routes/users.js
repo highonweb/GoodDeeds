@@ -5,6 +5,7 @@ const Fuse = require("fuse.js");
 const NGO = require("../Models/NGO");
 const User = require("../Models/Users");
 const Campaigns = require("../Models/Campaigns");
+const axios = require('axios')
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
@@ -24,6 +25,7 @@ router.get("/campaigns", async (req, res) => {
 // when user clicks on donate button on the campaign page
 
 router.post("/donate", async (req, res) => {
+  
   const user = await User.findById(req.auth);
   const campaign = await Campaigns.findById(req.body.campaign);
   const ngo = await NGO.findById(campaign.NGO);
@@ -33,6 +35,7 @@ router.post("/donate", async (req, res) => {
     amount: req.body.amount,
     date: Date.now(),
   });
+  
   await donation.save();
   user.totalAmt += req.body.amount;
   ngo.totalFundRaised += req.body.amount;
@@ -40,7 +43,26 @@ router.post("/donate", async (req, res) => {
   await user.save();
   await ngo.save();
   await campaign.save();
-  return res.json({ message: "Donation successful" });
+  let response =  await axios.post('https://api.razorpay.com/v1/payment_links',{
+    "amount": req.body.amount,
+    "currency": "INR",
+    "expire_by": 1691097057,
+    "reference_id": donation.id,
+    "description": `Payment for Rs.${req.body.amount}`,
+    "customer": {
+      "name": user.name,
+      "email": user.email
+    },
+    "notify": {
+      
+      "email": true
+    },
+    "reminder_enable": true,
+    "callback_url": "http://localhost:5713/home",
+    "callback_method": "get"
+  })
+  return res.json({link : response})
+  // return res.json({ message: "Donation successful" });
 });
 
 // GET /users/profile
