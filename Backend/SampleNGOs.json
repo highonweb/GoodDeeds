@@ -1,0 +1,156 @@
+[
+    {
+        "name": "UNICEF",
+        "email": "unicef@unicef.org",
+        "location": {
+            "lat": "40.7127753",
+            "long": "-74.0059728"
+        },
+        "tags": [
+            "Children",
+            "Education",
+            "Health"
+        ],
+        "type": "International NGO",
+        "logo": "https://www.unicef.org/images/UNICEF_logo_RGB.png",
+        "description": "UNICEF works in more than 190 countries and territories to save and improve children's lives, providing health care and immunizations, clean water and sanitation, nutrition, education, emergency relief and more.",
+        "amountSpent": 10000000,
+        "password": "unicefsecret",
+        "totalFundRaised": 200000000,
+        "campaigns": [],
+        "donors": [],
+        "followers": []
+    },
+    {
+        "name": "Doctors Without Borders",
+        "email": "info@doctorswithoutborders.org",
+        "location": {
+            "lat": "40.7127753",
+            "long": "-74.0059728"
+        },
+        "tags": [
+            "Health",
+            "Humanitarian",
+            "Emergency Relief"
+        ],
+        "type": "International NGO",
+        "logo": "https://www.doctorswithoutborders.org/sites/usa/files/dwb-logo-rgb.png",
+        "description": "Médecins Sans Frontières (MSF) is an international, independent, medical humanitarian organization that delivers emergency aid to people affected by armed conflict, epidemics, natural disasters, and exclusion from healthcare.",
+        "amountSpent": 10000000,
+        "password": "msfsecret",
+        "totalFundRaised": 200000000,
+        "campaigns": [],
+        "donors": [],
+        "followers": []
+    },
+    {
+        "name": "Save the Children",
+        "email": "info@savethechildren.org",
+        "location": {
+            "lat": "41.048601",
+            "long": "-73.439678"
+        },
+        "tags": [
+            "Children",
+            "Education",
+            "Hunger"
+        ],
+        "type": "International NGO",
+        "logo": "https://www.savethechildren.org/content/dam/global/photos/logos/save-the-children-logo.png",
+        "description": "Save the Children is a leading children's rights organization, with programs in over 120 countries, including the United States. We save children's lives, fight for their rights and help them fulfill their potential.",
+        "amountSpent": 10000000,
+        "password": "stcsecret",
+        "totalFundRaised": 200000000,
+        "campaigns": [],
+        "donors": [],
+        "followers": []
+    },
+    {
+        "name": "Amnesty International",
+        "email": "info@amnesty.org",
+        "location": {
+            "lat": "51.529162",
+            "long": "-0.103624"
+        },
+        "tags": [
+            "Human Rights",
+            "Justice",
+            "Freedom"
+        ],
+        "type": "International NGO",
+        "logo": "https://www.amnesty.org/static/img/ai_logo.svg",
+        "description": "Amnesty International is a global movement of more than 7 million people who campaign for a world where human rights are enjoyed by all. We work to protect people wherever justice, freedom, truth and dignity are denied.",
+        "amountSpent": 10000000,
+        "password": "amnestysecret",
+        "totalFundRaised": 200000000,
+        "campaigns": [],
+        "donors": [],
+        "followers": []
+    },
+    {
+        "name": "World Vision",
+        "email": "info@worldvision.org",
+        "location": {
+            "lat": "47.606209",
+            "long": "-122.332071"
+        },
+        "tags": [
+            "Children",
+            "Poverty",
+            "Disaster Relief"
+        ],
+        "type": "International NGO",
+        "logo": "https://www.worldvision.org/content/dam/worldvision/global/hero/world-vision-logo.png",
+        "description": "World Vision is a Christian humanitarian organization dedicated to working with children, families, and their communities worldwide to reach their full potential by tackling the root causes of poverty and injustice.",
+        "amountSpent": 10000000,
+        "password": "wvsecret",
+        "totalFundRaised": 200000000,
+        "campaigns": [],
+        "donors": [],
+        "followers": []
+    },
+    {
+        "name": "Oxfam",
+        "email": "info@oxfam.org",
+        "location": {
+            "lat": "51.752022",
+            "long": "-1.257726"
+        },
+        "tags": [
+            "Poverty",
+            "Hunger",
+            "Women's Rights"
+        ],
+        "type": "International NGO",
+        "logo": "https://www.oxfam.org/sites/default/files/styles/large/public/logo-oxfam-main.png",
+        "description": "Oxfam is a global movement of people working together to end the injustice of poverty. We help people build better futures for themselves, hold the powerful accountable, and save lives in disasters.",
+        "amountSpent": 10000000,
+        "password": "oxfamsecret",
+        "totalFundRaised": 200000000,
+        "campaigns": [],
+        "donors": [],
+        "followers": []
+    },
+    {
+        "name": "Greenpeace",
+        "email": "info@greenpeace.org",
+        "location": {
+            "lat": "52.376454",
+            "long": "4.895168"
+        },
+        "tags": [
+            "Environment",
+            "Climate Change",
+            "Sustainability"
+        ],
+        "type": "International NGO",
+        "logo": "https://www.greenpeace.org/static/img/Home/logo.png",
+        "description": "Greenpeace is a non-profit environmental organization with a presence in 55 countries. We act to change attitudes and behavior, to protect and conserve the environment and to promote peace.",
+        "amountSpent": 10000000,
+        "password": "greenpeacesecret",
+        "totalFundRaised": 200000000,
+        "campaigns": [],
+        "donors": [],
+        "followers": []
+    }
+]

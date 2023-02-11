@@ -30,6 +30,7 @@ router.post("/campaign", async (req, res) => {
     goal: req.body.goal,
   });
   campaign.save();
+  return res.json({ message: "Campaign created" });
 });
 
 router.get("/campaign/:id", async (req, res) => {
@@ -42,7 +43,10 @@ router.get("/campaign/:id", async (req, res) => {
 });
 
 router.get("/mycampaigns", async (req, res) => {
-  const campaigns = await Campaigns.find({ NGO: req.auth });
+  const campaigns = await Campaigns.find({ NGO: req.auth }).populate(
+    "NGO",
+    "name email"
+  );
   return res.json(campaigns);
 });
 
