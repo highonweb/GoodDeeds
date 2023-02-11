@@ -10,6 +10,7 @@ const cors = require("cors");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const NGORouter = require("./routes/NGO");
+const { readdirSync } = require("fs");
 
 require("dotenv").config();
 
@@ -27,8 +28,29 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", jwt({ secret: process.env.secret, algorithms: ["HS256"] }));
-app.use("/users", usersRouter);
 app.use("/NGO", jwt({ secret: process.env.secret, algorithms: ["HS256"] }));
+
+app.use("/NGO", (req, res, next) => {
+  console.log(req.auth);
+  if (req.auth.isNGO) {
+    req.auth = req.auth.id;
+    console.log(req.auth);
+    next();
+  } else {
+    return res.json({ message: "Not Authorized" });
+  }
+});
+app.use("/users", (req, res, next) => {
+  console.log(req.auth);
+  if (!req.auth.isNGO) {
+    req.auth = req.auth.id;
+    next();
+  } else {
+    return res.json({ message: "Not Authorized" });
+  }
+});
+app.use("/users", usersRouter);
+
 app.use("/NGO", NGORouter);
 
 module.exports = app;

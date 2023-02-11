@@ -18,7 +18,9 @@ router.post("/NGO", async (req, res) => {
     await ngo.save();
     return res.json({
       message: "NGO created",
-      jwt: jwt.sign(ngo.id, process.env.secret, { algorithm: "HS256" }),
+      jwt: jwt.sign({ id: ngo.id, isNGO: true }, process.env.secret, {
+        algorithm: "HS256",
+      }),
     });
   } catch (error) {
     return res.json(500, { message: "Internal Server Error" });
@@ -35,7 +37,9 @@ router.post("/user", async (req, res) => {
     await user.save();
     return res.json({
       message: "User created",
-      jwt: jwt.sign(user.id, process.env.secret, { algorithm: "HS256" }),
+      jwt: jwt.sign({ id: user.id, isNGO: false }, process.env.secret, {
+        algorithm: "HS256",
+      }),
     });
   } catch (error) {
     return res.json(500, { message: "Internal Server Error" });

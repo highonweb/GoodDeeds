@@ -5,6 +5,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get("/profile", async (req, res) => {
+  console.log(req.auth);
   const ngo = await NGO.findById(req.auth).select(
     "name description logo website email followers totalFundRaised amountSpent"
   );
@@ -21,8 +22,9 @@ router.post("/picture", async (req, res) => {
 });
 
 router.post("/campaign", async (req, res) => {
+  console.log(req.auth);
   const campaign = new Campaigns({
-    NGO: req.auth,
+    ngo: req.auth,
     title: req.body.title,
     image: req.body.image,
     description: req.body.description,

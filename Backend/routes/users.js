@@ -13,13 +13,14 @@ router.get("/", function (req, res, next) {
 // get all the campaigns of the NGOs followed by the user
 router.get("/campaigns", async (req, res) => {
   const user = await User.findById(req.auth).select("following");
-  console.log(user);
+  console.log(user.following);
   const campaigns = await Campaigns.find({
-    NGO: { $in: user.following },
-  }).select("title description raised goal NGO");
+    ngo: { $in: user.following },
+  }).populate("ngo", "name email");
+
+  console.log(campaigns);
   return res.json(campaigns);
 });
-
 // when user clicks on donate button on the campaign page
 
 router.post("/donate", async (req, res) => {
@@ -113,10 +114,30 @@ router.get("/groups", async (req, res) => {
 
 // get request for a follow button NGO
 router.post("/follow", async (req, res) => {
+  console.log(req.body.id);
+  const ngo = await NGO.findById(req.body.id);
   const user = await User.findById(req.auth);
-  user.following.push(req.body.id);
-  await user.save();
-  return res.json({ message: "Followed" });
+  console.log(user);
+  if (ngo.followers.includes(req.auth)) {
+    ngo.followers = ngo.likes.filter((id) => id != req.body.id);
+    user.following = user.following.filter((id) => id != req.auth);
+    await ngo.save();
+    await user.save();
+    return res.json({ message: "unfollowed" });
+  } else {
+    user.following.push(req.body.id);
+    ngo.followers.push(req.auth);
+    await ngo.save();
+    await user.save();
+  }
+
+  return res.json({ message: "followed" });
+});
+
+// get request for number of follows of an NGO
+router.get("/follows", async (req, res) => {
+  const follows = await NGO.findById(req.query.id).select("followers");
+  return res.json({ follows: follows.followers.length });
 });
 
 // get all the group messages

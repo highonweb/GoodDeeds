@@ -19,7 +19,9 @@ router.post("/", async (req, res) => {
       }
       return res.json({
         message: "NGO created",
-        jwt: jwt.sign(ngo.id, process.env.secret, { algorithm: "HS256" }),
+        jwt: jwt.sign({ id: ngo.id, isNGO: true }, process.env.secret, {
+          algorithm: "HS256",
+        }),
       });
     } else {
       const user = await User.findOne({ email: req.body.email });
@@ -30,7 +32,9 @@ router.post("/", async (req, res) => {
       }
       return res.json({
         message: "User created",
-        jwt: jwt.sign(user.id, process.env.secret, { algorithm: "HS256" }),
+        jwt: jwt.sign({ id: user.id, isNGO: false }, process.env.secret, {
+          algorithm: "HS256",
+        }),
       });
     }
   } catch (error) {}
