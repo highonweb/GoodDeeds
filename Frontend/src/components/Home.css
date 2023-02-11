@@ -27,6 +27,7 @@
 }
 #logo {
   height: 15vh;
+  display: inline;
 }
 header {
   text-align: center;
@@ -80,7 +81,7 @@ nav ul {
 nav li {
   float: left;
 }
-nav #signin {
+nav #signinbutton {
   float: right;
 }
 

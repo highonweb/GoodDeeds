@@ -7,26 +7,26 @@ import Ngohome from "./components/ngo/Ngo.home";
 import NgoRegister from "./components/ngo/Ngo.register";
 import Signin from "./components/signin/Signin";
 import UserRegister from "./components/users/User.register";
-import Search from "./components/search/Search";
+import Search from "./components/users/search/Search";
+import NgoCreateCampaign from "./components/ngo/Ngo.createcampaign";
+import Explore from "./components/explore/Explore";
+import Chat from "./components/chat/Chat";
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <div className="App">
       <Search />
-      {/* <NgoProfile
-        name="This is a ngo "
-        description="test"
-        logo="https://via.placeholder.com/200 "
-        website="https://"
-        email="rajesh@gmail.com"
-        followers="2"
-        fundraised="3"
-        spent="2"
-        campaign={["rajesh", "raju"]}
-      /> */}
-      {/* <Signin></Signin> */}
-      {/* <NgoRegister></NgoRegister> */}
+       {/* <NgoCreateCampaign/> */}
+       {/* <Signin></Signin>
+      <NgoRegister></NgoRegister> */}
+      {/* <NgoProfile/> */}
+      {/* <NgoRegister/> */}
+      {/* <UserRegister/> */}
+      {/* <Ngohome/> */}
+      {/* <Home/> */}
+      {/* <Chat/> */}
+      {/* <Home/> */}
     </div>
   );
 }

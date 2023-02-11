@@ -1,23 +1,24 @@
 import React from 'react'
 import './Home.css'
-
+import { Link } from 'react-router-dom';
+import { Heading } from '@chakra-ui/react';
 const Home = () => {
   return (
     <div id='Home'>
         <nav>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><Link to='/'>Home</Link></li>
             
-            <li id='signin'><a href="#">Sign In</a></li>
+            <li id='signinbutton'><Link to='/signin'>Signin</Link></li>
         </ul>
     </nav>
 
       <header>
-        <h1>Good Deeds</h1>
+        <Heading>Good Deeds</Heading>
         <img src="./logo.svg" alt="" id='logo' />
         <div>
-            <button className='mbutt'>Donate</button>
-            <button className='mbutt'>Raise Funds</button>
+            <Link to='/signup/user'><button className='mbutt'>Donate</button></Link>
+            <Link to='/signup/ngo'><button className='mbutt'>Raise Funds</button></Link>
 
         </div>
       </header>

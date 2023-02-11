@@ -1,0 +1,72 @@
+#suggestions{
+    width: 75vw;
+    height: auto;
+    display: flex;
+    
+    
+    justify-content: space-between;
+    margin: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: black;
+    color:  white;
+}
+#suggestions > #profile{
+    margin-right: 10px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#profile > #website{
+    font-size: 25px;
+    /* margin-bottom: 30px; */
+}
+
+#profile > #description{
+    font-size: 20px;
+} 
+
+
+#like{
+    display: flex;
+}
+#like-follow{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0px;
+   
+    
+   
+}
+
+#like> button{
+   
+    font-size: 30px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#follow{
+    display: flex;
+
+}
+
+#follow> button{
+    margin-right: 10px;
+  
+    font-size: 30px;
+
+    /* border-radius: 50%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}

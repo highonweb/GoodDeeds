@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './ngo.home.css'
 import Ngofeeds from  './Ngo.feeds'
+import axios from 'axios'
 function NgoHome() {
+  const [feeds, setFeeds] = React.useState([])
+  React.useEffect(()=>{
+    axios.get('http://192.168.28.251:3000/users/campaigns',{
+      headers:{
+        'Authorization':localStorage.getItem('jwt')
+      }
+    })
+    .then((data)=>{setFeeds(data.data)})
+    .catch(error=>console.log(error))
+  }, [])
   return (
     <div id='ngohome'>
       <nav>
@@ -16,7 +27,14 @@ function NgoHome() {
         </ul>
     </nav> 
     <section id='feeds'>
-      <Ngofeeds/>
+      {
+        feeds.map((feed)=>{
+          return(
+           <Ngofeeds key={feed._id} name={feed.ngo.name} raised={feed.raised} goal={feed.goal} description={feed.description} title={feed.title} image={feed.image}/>
+ 
+          )
+       })
+      }
     </section>
       
     </div>

@@ -1,10 +1,18 @@
 import React from 'react'
 import './signin.css'
 import axios from 'axios'
-
+import { Button, Heading, Input, Checkbox, Text } from '@chakra-ui/react';
+import { Link, Navigate } from 'react-router-dom';
 
 function Signin() {
+  const [auth, setAuth] = React.useState(false)
+  React.useEffect(()=>{
+    if(localStorage.getItem('jwt')){
+        setAuth(true)
 
+    }
+  },[])
+  
   const [email, setEmail] = React.useState("");
   const [isNGO,  setIsNGO] = React.useState("");
 
@@ -22,28 +30,38 @@ function Signin() {
       
       console.log(response.data);
       localStorage.setItem('jwt', "Bearer " + response.data.jwt)
+      setAuth(true)
     } catch (error) {
       alert('no such user found')
     }
   };
 
-  return (
-    <div id='signin'>
-     <form id='form' onSubmit={(e)=>handleSignin(e)}>
-        <h1>signin</h1>
-        <input type="text" name='' placeholder='email' onChange={(e)=>setEmail(e.target.value)} required/>
-        <input type="password" name="" id="" placeholder='password' onChange={(e)=>setPassword(e.target.value)} required/>
-       
-           <div>
-           <label htmlFor="ngo">Are you an NGO?</label>
-           <input type="checkbox" name="ngo" id="ngo" onChange={(e)=>{setIsNGO(e.target.checked)}} />
-           </div>
-    
-        
-        <button type='submit'>signin</button>
-     </form>
-    </div>
-  )
+  {
+
+  }
+  if(auth)
+    return <Navigate to="/" replace />
+  
+  else{
+    return (
+      <div id='signin'>
+       <form id='form' onSubmit={(e)=>handleSignin(e)}>
+          <Heading>signin</Heading>
+          <Input type="text" name='' placeholder='email' onChange={(e)=>setEmail(e.target.value)} required/>
+          <Input type="password" name="" id="" placeholder='password' onChange={(e)=>setPassword(e.target.value)} required/>
+         
+             <div id='checkbox'>
+             <label htmlFor="ngo">Are you an NGO?</label>
+             <Checkbox margin={0} name="ngo" id="ngo" onChange={(e)=>{setIsNGO(e.target.checked)}} />
+             </div>
+      
+          
+          <Button type='submit' colorScheme="red">signin</Button>
+          <p>Don't have an account? <span><Link to='/signup/ngo'><Text textDecoration={"underline"}>Signup</Text></Link></span></p>
+       </form>
+      </div>
+    )
+  }
 }
 
 export default Signin

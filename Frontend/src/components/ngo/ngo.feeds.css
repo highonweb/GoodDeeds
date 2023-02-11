@@ -1,6 +1,25 @@
 #ngofeeds{
 
-    width: 450px;
-    height: 500px;
+    width: 500px;
+    height: auto;
     border: 1px solid gray;
+
 }
+#title{
+    display: flex;
+    padding: 10px;
+
+}
+
+#title > img{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+#ngofeeds > img{
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+

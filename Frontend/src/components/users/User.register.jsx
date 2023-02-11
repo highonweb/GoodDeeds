@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import './user.register.css'
+import { Input, Heading, Button } from '@chakra-ui/react'
 function UserRegister() {
   const [name, setName] = React.useState("")
   const [email, setEmail] = React.useState("")
@@ -58,12 +59,12 @@ function UserRegister() {
   return (
     <div id='userRegister'>
         <form id='form' onSubmit={(e)=>{handleSignup(e)}}>
-             <h1>register</h1>
-            <input type="text" name="" id="" placeholder='Name' onChange={(e)=>{setName(e.target.value)}} required/>
-            <input type="text" name="" id="" placeholder='Email' onChange={(e)=>{setEmail(e.target.value)}} required/> 
-            <input type="password" name="" id="" placeholder='password' onChange={(e)=>{setPassword(e.target.value)}} required/>
-            <input type="password" name="" id="" placeholder='confirm password' onChange={(e)=>{setConfirmPassword(e.target.value)}} required/>
-             <button>submit</button>
+             <Heading>register</Heading>
+            <Input type="text" name="" id="" placeholder='Name' onChange={(e)=>{setName(e.target.value)}} required/>
+            <Input type="text" name="" id="" placeholder='Email' onChange={(e)=>{setEmail(e.target.value)}} required/> 
+            <Input type="password" name="" id="" placeholder='password' onChange={(e)=>{setPassword(e.target.value)}} required/>
+            <Input type="password" name="" id="" placeholder='confirm password' onChange={(e)=>{setConfirmPassword(e.target.value)}} required/>
+             <Button type='submit' colorScheme="red">submit</Button>
       </form>
     </div>
   )
