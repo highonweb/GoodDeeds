@@ -51,7 +51,7 @@ router.post("/donate", async (req, res) => {
     currency: "INR",
     expire_by: 1691097057,
     reference_id: donation.id,
-    description: `Payment for Rs.${req.body.amount}`,
+    description: `Payment of Rs.${req.body.amount} for the campaign ${campaign.title} by ${ngo.name}`,
     customer: {
       name: user.name,
       email: user.email,

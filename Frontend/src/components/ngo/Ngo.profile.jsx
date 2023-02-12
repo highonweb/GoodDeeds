@@ -19,30 +19,32 @@ import NgoCampaign from "./Ngo.campaign";
 
 function NgoProfile() {
   const [profiledata, setProfileData] = React.useState([]);
-  // useEffect(()=>{
-
-  //     axios
-  //       .get("http://192.168.43.:3000/NGO/profile", {
-  //         headers: {
-  //           Authorization: localStorage.getItem("jwt"),
-  //         },
-  //       })
-  //       .then((data) => {setProfileData(data.data) ;console.log(data)})
-  //       .catch((error) => console.log(error));
-
-  // }, [])
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/NGO/profile", {
+        headers: {
+          Authorization: localStorage.getItem("jwt"),
+        },
+      })
+      .then((data) => {
+        setProfileData(data.data);
+        console.log(data.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <>
       <NgoProfileHelper
-        name={"rajesh"}
-        description={"this is a test description"}
+        name={profiledata.name}
+        description={profiledata.description}
         logo={
           "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
         }
-        website={"http://"}
-        email={"rajesh@gmail.com"}
-        followers={40}
-        fundraised={100}
+        website={profiledata.website}
+        email={profiledata.email}
+        // followers={profiledata.followers}
+        follows={profiledata.followers}
+        fundraised={profiledata.totalFundRaised}
       />
     </>
   );
@@ -71,89 +73,17 @@ function NgoProfileHelper({
   logo,
   website,
   email,
-  followers,
+  follows,
   fundraised,
-  spent,
-  campaign,
 }) {
-  function uploadImage(event) {
-    const input = event.target;
-
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-
-      reader.onload = function (e) {
-        const dataURL = e.target.result;
-        axios
-          .post(
-            "http://localhost:3000/NGO/picture",
-            {
-              logo: dataURL,
-            },
-            {
-              headers: {
-                Authorization: localStorage.getItem("jwt"),
-              },
-            }
-          )
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      };
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
   return (
     <div id="ngoprofile">
-      {/* <nav>
-        <ul>
-          <li>
-            <a href="#">Home</a>
-          </li>
-        </ul>
-      </nav> */}
-      {/* <div id="inner-container">
-        <div id="logo-container">
-          <img src={logo} alt="Profile Logo" />
-          <h1>{name}</h1>
-        </div>
-        <input type="file" name="" id="avatar" onChange={uploadImage} />
-        <p>{description}</p>
-        <p>
-          <strong>Website:</strong> <a href={website}>{website}</a>
-        </p>
-        <p>
-          <strong>Email:</strong> {email}
-        </p>
-        <p>
-          <strong>Followers:</strong> {followers}
-        </p>
-        <p>
-          <strong>Fundraised:</strong> ${fundraised}
-        </p>
-        <p>
-          <strong>Amount Spent:</strong> ${spent}
-        </p>
-        <hr />
-        <h2>Claim History</h2>
-        <ul>
-          {campaign.map((claim) => (
-            <li key={claim.id}>{claim.description}</li>
-          ))}
-        </ul>
-      </div> */}
-
       <Card
         direction={{ base: "column", sm: "row" }}
         overflow="hidden"
         variant="outline"
-        width="60vw"
-        height="25vh"
+        width="100vw"
+        // height="25vh"
         padding={"10px"}
       >
         <Image
@@ -177,7 +107,7 @@ function NgoProfileHelper({
             <Text>{description}</Text>
             <HStack spacing="100px">
               <Text>
-                <strong>Followers:</strong> {followers}
+                <strong>Followers:</strong> ${follows.length}
               </Text>
               <Text>
                 <strong>fundraised:</strong> ${fundraised}
@@ -199,7 +129,6 @@ function NgoProfileHelper({
           <NgoCampaign
             title={"oombu"}
             width="39vw"
-
             image={
               "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
             }
@@ -214,7 +143,6 @@ function NgoProfileHelper({
             }
             description={"punda is not word it is an emotion"}
             width="39vw"
-
             raised={"9"}
             goal="-10"
           />
@@ -225,7 +153,6 @@ function NgoProfileHelper({
             }
             description={"punda is not word it is an emotion"}
             width="39vw"
-
             raised={"9"}
             goal="-10"
           />
@@ -238,38 +165,38 @@ function NgoProfileHelper({
         </div>
       </div>
       <div id="success">
-          <Donor name="Successful Campaigns" />
-          <NgoCampaign
-            title={"oombu"}
-            width="60vw"
-            image={
-              "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-            }
-            description={"punda is not word it is an emotion"}
-            raised={"9"}
-            goal="-10"
-          />
-          <NgoCampaign
-            title={"oombu"}
-            width="60vw"
-            image={
-              "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-            }
-            description={"punda is not word it is an emotion"}
-            raised={"9"}
-            goal="-10"
-          />
-          <NgoCampaign
-            title={"oombu"}
-            width="60vw"
-            image={
-              "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-            }
-            description={"punda is not word it is an emotion"}
-            raised={"9"}
-            goal="-10"
-          />
-        </div>
+        <Donor name="Successful Campaigns" />
+        <NgoCampaign
+          title={"oombu"}
+          width="60vw"
+          image={
+            "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+          }
+          description={"punda is not word it is an emotion"}
+          raised={"9"}
+          goal="-10"
+        />
+        <NgoCampaign
+          title={"oombu"}
+          width="60vw"
+          image={
+            "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+          }
+          description={"punda is not word it is an emotion"}
+          raised={"9"}
+          goal="-10"
+        />
+        <NgoCampaign
+          title={"oombu"}
+          width="60vw"
+          image={
+            "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+          }
+          description={"punda is not word it is an emotion"}
+          raised={"9"}
+          goal="-10"
+        />
+      </div>
     </div>
   );
 }
