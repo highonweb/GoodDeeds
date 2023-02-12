@@ -42,7 +42,7 @@ const Explore = () => {
 
                 
               </HStack>
-              <Link to={'/chat'}>
+              <Link to={'/profile'}>
               <Button
                 size="sm"
           
